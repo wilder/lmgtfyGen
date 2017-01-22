@@ -1,5 +1,7 @@
 package com.wilderpereira.lmgtfygen.presentation
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -8,6 +10,8 @@ import com.jakewharton.rxbinding.widget.RxAdapterView
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.ClipData
+import android.support.v4.app.ShareCompat
 
 
 class MainActivity : AppCompatActivity(), MainPresenter.View {
@@ -36,6 +40,20 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     override fun updateGeneratedUrl(newString: String) {
         generatedUrlTv.text = newString
+    }
+
+    fun copyToClipboard(v: View){
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("url", generatedUrlTv.text)
+        clipboard.primaryClip = clip
+    }
+
+    fun shareUrl(v: View){
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setText(generatedUrlTv.text)
+                .setType("text/plain")
+                .startChooser()
     }
 
 }

@@ -55,6 +55,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:onClick="copyToClipboard"
             android:id="@+id/copyBtn"
             android:text="Copy"
             android:layout_width="wrap_content"
@@ -63,6 +64,13 @@
         <Button
             android:id="@+id/shortenBtn"
             android:text="Shorten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:onClick="shareUrl"
+            android:id="@+id/shareBtn"
+            android:text="Share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
