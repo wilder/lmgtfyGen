@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_types">
+        <item>Web</item>
+        <item>Images</item>
+        <item>Videos</item>
+        <item>Maps</item>
+        <item>News</item>
+        <item>Shopping</item>
+        <item>Books</item>
+        <item>Finance</item>
+        <item>Scholar</item>
+    </string-array>
+</resources>
