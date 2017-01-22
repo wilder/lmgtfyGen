@@ -8,13 +8,18 @@ import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val presenter : MainPresenter = MainPresenter(this)
         loadSpinner()
+
+        val spinnerSub = RxAdapterView.itemSelections(searchTypeSpinner)
+                .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString()) }
+
     }
 
     private fun loadSpinner(){
@@ -22,6 +27,10 @@ class MainActivity : AppCompatActivity(){
                 this, R.array.search_types, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         searchTypeSpinner.adapter = adapter
+    }
+
+    override fun updateGeneratedUrl(newString: String) {
+        generatedUrlTv.text = newString
     }
 
 }

@@ -6,7 +6,7 @@ package com.wilderpereira.lmgtfygen.presentation
 class MainPresenter(val view: MainActivity) {
 
     fun  updateSearchType(value: String) {
-
+        view.updateGeneratedUrl(value)
     }
 
     interface View {
