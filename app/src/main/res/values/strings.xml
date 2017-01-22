@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LmgtfyGen</string>
+    <string name="lmgtfy_base_url"><![CDATA[lmgtfy.com/?t=&q=]]></string>
 </resources>

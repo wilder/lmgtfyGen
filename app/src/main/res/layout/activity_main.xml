@@ -39,6 +39,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
+        android:text="@string/lmgtfy_base_url"
         android:id="@+id/generatedUrlTv"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
