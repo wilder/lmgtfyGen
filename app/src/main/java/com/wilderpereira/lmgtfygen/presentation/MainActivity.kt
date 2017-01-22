@@ -2,8 +2,10 @@ package com.wilderpereira.lmgtfygen.presentation
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ArrayAdapter
 import com.jakewharton.rxbinding.widget.RxAdapterView
+import com.jakewharton.rxbinding.widget.RxTextView
 import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +20,10 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         loadSpinner()
 
         val spinnerSub = RxAdapterView.itemSelections(searchTypeSpinner)
-                .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString()) }
+                .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString(), generatedUrlTv.text) }
+
+        val editTextSub = RxTextView.textChanges(searchEt)
+                .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
 
     }
 

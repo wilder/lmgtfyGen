@@ -5,8 +5,15 @@ package com.wilderpereira.lmgtfygen.presentation
  */
 class MainPresenter(val view: MainActivity) {
 
-    fun  updateSearchType(value: String) {
-        view.updateGeneratedUrl(value)
+    val TYPE_REGEX = "(?<=t=)\\w*".toRegex()
+    val SEARCH_REGEX = "(?<=q=).*$".toRegex()
+
+    fun updateSearchType(type: String, url: CharSequence) {
+        view.updateGeneratedUrl(url.replace(TYPE_REGEX, type[0].toLowerCase().toString()))
+    }
+
+    fun updateSearchValue(searchValue: String, url: CharSequence){
+        view.updateGeneratedUrl(url.replace(SEARCH_REGEX, searchValue))
     }
 
     interface View {
