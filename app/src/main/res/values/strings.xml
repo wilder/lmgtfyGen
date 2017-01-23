@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LmgtfyGen</string>
     <string name="lmgtfy_base_url"><![CDATA[lmgtfy.com/?t=&q=]]></string>
+    <string name="api_key">AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I</string>
 </resources>
