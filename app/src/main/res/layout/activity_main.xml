@@ -7,21 +7,30 @@
     android:layout_height="match_parent"
     tools:context="com.wilderpereira.lmgtfygen.presentation.MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lmgtfy_logo"/>
+
     <LinearLayout
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/big_margin"
+        android:layout_marginRight="@dimen/big_margin"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
         <TextView
+            android:textSize="@dimen/big_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search Type:"/>
         
         <Spinner
+            android:gravity="left"
+            android:layout_gravity="end"
+            android:textSize="@dimen/big_text_size"
             android:id="@+id/searchTypeSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         
     </LinearLayout>
@@ -30,36 +39,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:textSize="@dimen/big_text_size"
+            android:layout_marginLeft="@dimen/mid_margin"
+            android:layout_marginRight="@dimen/big_margin"
             android:id="@+id/searchEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search" />
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:text="@string/lmgtfy_base_url"
-        android:id="@+id/generatedUrlTv"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_marginLeft="@dimen/big_margin"
+        android:layout_marginRight="@dimen/big_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size"
+            android:text="@string/lmgtfy_base_url"
+            android:id="@+id/generatedUrlTv"
+            android:layout_weight="9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:onClick="copyToClipboard"
+            android:src="@drawable/ic_content_copy"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <LinearLayout
+        android:layout_margin="@dimen/margin"
         android:gravity="end"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <Button
-            android:onClick="copyToClipboard"
-            android:id="@+id/copyBtn"
-            android:text="Copy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/shortenBtn"
@@ -68,6 +84,8 @@
             android:layout_height="wrap_content" />
 
         <Button
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="shareUrl"
             android:id="@+id/shareBtn"
             android:text="Share"
