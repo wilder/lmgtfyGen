@@ -12,6 +12,7 @@ import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.ClipData
 import android.support.v4.app.ShareCompat
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity(), MainPresenter.View {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("url", generatedUrlTv.text)
         clipboard.primaryClip = clip
+        Toast.makeText(this, "Url copied to clipboard", Toast.LENGTH_SHORT)
     }
 
     fun shareUrl(v: View){
