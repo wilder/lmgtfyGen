@@ -13,15 +13,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.ClipData
 import android.support.v4.app.ShareCompat
 import android.widget.Toast
+import com.wilderpereira.lmgtfygen.App
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), MainPresenter.View {
+class MainActivity : AppCompatActivity(), MainContract.View {
+
+    @Inject lateinit var presenter: MainContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val presenter : MainPresenter = MainPresenter(this)
+        App.getComponent().inject(this);
+        presenter.bindView(this)
+
         loadSpinner()
 
         val spinnerSub = RxAdapterView.itemSelections(searchTypeSpinner)
