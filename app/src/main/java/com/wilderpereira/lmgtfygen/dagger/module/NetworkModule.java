@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Wilder on 24/01/17.
  */
 
+@Module
 public class NetworkModule {
     private static final int CACHE_SIZE_10_MB = 10 * 1024 * 1024;
 
