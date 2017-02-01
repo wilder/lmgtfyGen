@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        App.getComponent().inject(this);
+        App.getComponent().inject(this)
         presenter.bindView(this)
 
         loadSpinner()

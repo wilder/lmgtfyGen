@@ -1,6 +1,8 @@
 package com.wilderpereira.lmgtfygen.dagger.module;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -24,61 +26,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetworkModule {
-    private static final int CACHE_SIZE_10_MB = 10 * 1024 * 1024;
 
+    // Dagger will only look for methods annotated with @Provides
     @Provides
     @Singleton
-    Cache providesOkHttpCache(Application application) {
-        int cacheSize = CACHE_SIZE_10_MB;
-        return new Cache(application.getCacheDir(), cacheSize);
+    // Application reference must come from AppModule.class
+    SharedPreferences providesSharedPreferences(Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
     @Singleton
-    Gson providesGson() {
-        return new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .create();
-    }
-
-    @Provides
-    @Singleton
-    HttpLoggingInterceptor providesHttpLoggingInterceptor() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        return httpLoggingInterceptor;
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient providesOkHttpClient(Cache cache, HttpLoggingInterceptor httpLoggingInterceptor) {
-        return new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
-                .cache(cache).build();
-    }
-
-    @Provides
-    @Singleton
-    GsonConverterFactory providesGsonConverterFactory(Gson gson) {
-        return GsonConverterFactory.create(gson);
-    }
-
-    @Provides
-    @Singleton
-    RxJavaCallAdapterFactory providesRxJavaCallAdapterFactory() {
-        return RxJavaCallAdapterFactory.create();
-    }
-
-    @Provides
-    @Singleton
-    Retrofit providesRetrofit(GsonConverterFactory gsonConverterFactory, OkHttpClient okHttpClient,
-                              RxJavaCallAdapterFactory rxJavaCallAdapterFactory,
-                              @Named(SettingsModule.BASE_URL) String baseUrl) {
-        return new Retrofit.Builder().addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(rxJavaCallAdapterFactory)
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
+    Retrofit provideRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl("https://www.googleapis.com/urlshortener/v1/")
                 .build();
+        return retrofit;
     }
 }
