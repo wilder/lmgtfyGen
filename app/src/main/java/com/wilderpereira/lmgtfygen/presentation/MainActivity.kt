@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.ClipData
 import android.support.v4.app.ShareCompat
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.wilderpereira.lmgtfygen.App
 import javax.inject.Inject
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), MainContract.View {
 
     @Inject lateinit var presenter: MainContract.Presenter
-    lateinit var urlEditText: EditText
+    lateinit var generatedUrlTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         App.getComponent().inject(this)
         presenter.bindView(this)
 
-        urlEditText = findViewById(R.id.searchEt) as EditText
+        generatedUrlTv = findViewById(R.id.generatedUrlTv) as TextView
 
         loadSpinner()
 
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     fun shortenUrl(v: View){
-        presenter.shortenUrl(urlEditText.text.toString())
+        presenter.shortenUrl(generatedUrlTv.text.toString())
         Toast.makeText(this, "Url shortened", Toast.LENGTH_SHORT).show()
     }
 

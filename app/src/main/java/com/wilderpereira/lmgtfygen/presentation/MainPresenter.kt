@@ -39,7 +39,7 @@ class MainPresenter : MainContract.Presenter  {
     override fun shortenUrl(bigUrl: String) {
         var urlShortener = retrofit.create(UrlShortenerApi::class.java)
 
-        var shortenResponse = urlShortener.shortenUrl("AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I", ShortenerBody(bigUrl))
+        var shortenResponse = urlShortener.shortenUrl("AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I", ShortenerBody(bigUrl.trimEnd().trimStart().replace(' ','+')))
         shortenResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ shortenResponse ->
