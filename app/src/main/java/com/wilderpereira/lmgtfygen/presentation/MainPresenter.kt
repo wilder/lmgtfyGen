@@ -39,7 +39,18 @@ class MainPresenter : MainContract.Presenter  {
     }
 
     override fun shortenUrl(bigUrl: String) {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var urlShortener = retrofit.create(UrlShortenerApi::class.java)
+
+        var shortenResponse = urlShortener.shortenUrl(
+                "AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I", ShortenerBody(bigUrl))
+        shortenResponse.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ shortenResponse ->
+                    view.updateGeneratedUrl(shortenResponse.shortUrl.toString())
+                },
+                        { e ->
+                            Log.d("mainpresenter", "error "+e.message)
+                        })
     }
 
 }

@@ -12,6 +12,7 @@ import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.ClipData
 import android.support.v4.app.ShareCompat
+import android.widget.EditText
 import android.widget.Toast
 import com.wilderpereira.lmgtfygen.App
 import javax.inject.Inject
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), MainContract.View {
 
     @Inject lateinit var presenter: MainContract.Presenter
+    lateinit var urlEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         App.getComponent().inject(this)
         presenter.bindView(this)
 
+        urlEditText = findViewById(R.id.searchEt) as EditText
+
         loadSpinner()
 
         val spinnerSub = RxAdapterView.itemSelections(searchTypeSpinner)
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         val editTextSub = RxTextView.textChanges(searchEt)
                 .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
+
 
     }
 
@@ -53,7 +58,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("url", generatedUrlTv.text)
         clipboard.primaryClip = clip
-        Toast.makeText(this, "Url copied to clipboard", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Url copied to clipboard", Toast.LENGTH_SHORT).show()
     }
 
     fun shareUrl(v: View){
@@ -62,6 +67,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 .setText(generatedUrlTv.text)
                 .setType("text/plain")
                 .startChooser()
+    }
+
+    fun shortenUrl(v: View){
+        presenter.shortenUrl(urlEditText.text.toString())
+        Toast.makeText(this, "Url shortened", Toast.LENGTH_SHORT).show()
     }
 
 }
