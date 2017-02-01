@@ -38,8 +38,17 @@ public class NetworkModule {
     @Provides
     @Singleton
     Retrofit provideRetrofit() {
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+        httpClient.addInterceptor(logging);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl("https://www.googleapis.com/urlshortener/v1/")
                 .build();
