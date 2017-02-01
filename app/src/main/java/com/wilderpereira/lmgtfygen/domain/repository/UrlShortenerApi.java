@@ -1,7 +1,7 @@
 package com.wilderpereira.lmgtfygen.domain.repository;
 
+import com.wilderpereira.lmgtfygen.domain.entity.SearchUrl;
 import com.wilderpereira.lmgtfygen.domain.entity.ShortenerBody;
-import com.wilderpereira.lmgtfygen.domain.entity.ShotenerResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -14,5 +14,5 @@ import rx.Observable;
 
 public interface UrlShortenerApi {
     @POST("url")
-    Observable<ShotenerResponse> shortenUrl(@Query("key") String key, @Body ShortenerBody body);
+    Observable<SearchUrl> shortenUrl(@Query("key") String key, @Body ShortenerBody body);
 }

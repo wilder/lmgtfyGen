@@ -2,6 +2,7 @@ package com.wilderpereira.lmgtfygen.presentation
 
 import android.util.Log
 import com.wilderpereira.lmgtfygen.App
+import com.wilderpereira.lmgtfygen.domain.entity.SearchUrl
 import com.wilderpereira.lmgtfygen.domain.entity.ShortenerBody
 import com.wilderpereira.lmgtfygen.domain.repository.UrlShortenerApi
 import retrofit2.Retrofit
@@ -17,32 +18,28 @@ class MainPresenter : MainContract.Presenter  {
     lateinit var view : MainContract.View
     @Inject lateinit var retrofit: Retrofit
 
-
-    val TYPE_REGEX = "(?<=t=)\\w*".toRegex()
-    val SEARCH_REGEX = "(?<=q=).*$".toRegex()
+    var searchUrl = SearchUrl()
 
     constructor(){
         App.getComponent().inject(this)
     }
-
 
     override fun bindView(view: MainContract.View) {
         this.view = view
     }
 
     override fun updateSearchType(type: String, url: CharSequence) {
-        view.updateGeneratedUrl(url.replace(TYPE_REGEX, type[0].toLowerCase().toString()))
+        view.updateGeneratedUrl(searchUrl.updateSearchType(type))
     }
 
     override fun updateSearchValue(searchValue: String, url: CharSequence){
-        view.updateGeneratedUrl(url.replace(SEARCH_REGEX, searchValue))
+        view.updateGeneratedUrl(searchUrl.updateSearchValue(searchValue))
     }
 
     override fun shortenUrl(bigUrl: String) {
         var urlShortener = retrofit.create(UrlShortenerApi::class.java)
 
-        var shortenResponse = urlShortener.shortenUrl(
-                "AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I", ShortenerBody(bigUrl))
+        var shortenResponse = urlShortener.shortenUrl("AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I", ShortenerBody(bigUrl))
         shortenResponse.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ shortenResponse ->
