@@ -1,29 +1,31 @@
-package com.wilderpereira.lmgtfygen
+package com.wilderpereira.lmgtfygen;
 
-import android.app.Application
+import android.app.Application;
 
-import com.wilderpereira.lmgtfygen.dagger.component.DaggerMainComponent
-import com.wilderpereira.lmgtfygen.dagger.component.MainComponent
+import com.wilderpereira.lmgtfygen.dagger.component.DaggerMainComponent;
+import com.wilderpereira.lmgtfygen.dagger.component.MainComponent;
 
 /**
  * Created by Wilder on 24/01/17.
  */
 
-class App : Application() {
+public class App extends Application {
 
-    override fun onCreate() {
-        super.onCreate()
-        initDagger()
+    private static MainComponent component;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initDagger();
     }
 
-    private fun initDagger() {
+    private void initDagger() {
         component = DaggerMainComponent
                 .builder()
-                .build()
+                .build();
     }
 
-    companion object {
-        var component: MainComponent? = null
-            private set
+    public static MainComponent getComponent() {
+        return component;
     }
 }
