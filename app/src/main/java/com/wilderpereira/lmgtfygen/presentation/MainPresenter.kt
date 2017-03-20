@@ -1,7 +1,10 @@
 package com.wilderpereira.lmgtfygen.presentation
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.wilderpereira.lmgtfygen.App
+import com.wilderpereira.lmgtfygen.R
 import com.wilderpereira.lmgtfygen.domain.entity.SearchUrl
 import com.wilderpereira.lmgtfygen.domain.entity.ShortenerBody
 import com.wilderpereira.lmgtfygen.domain.repository.UrlShortenerApi
@@ -16,6 +19,7 @@ import javax.inject.Inject
 class MainPresenter : MainContract.Presenter  {
 
     lateinit var view : MainContract.View
+    lateinit var context: Context
     @Inject lateinit var retrofit: Retrofit
 
     var searchUrl = SearchUrl()
@@ -24,8 +28,9 @@ class MainPresenter : MainContract.Presenter  {
         App.getComponent().inject(this)
     }
 
-    override fun bindView(view: MainContract.View) {
+    override fun bindView(view: MainContract.View, context: Context) {
         this.view = view
+        this.context = context
     }
 
     override fun updateSearchType(type: String, url: CharSequence) {
@@ -44,9 +49,11 @@ class MainPresenter : MainContract.Presenter  {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ shortenResponse ->
                     view.updateGeneratedUrl(shortenResponse.shortUrl.toString())
+                    view.displayToast(context.getString(R.string.url_shortened))
                 },
                         { e ->
                             Log.d("mainpresenter", "error "+e.message)
+                            view.displayToast(context.getString(R.string.url_not_shortened))
                         })
     }
 

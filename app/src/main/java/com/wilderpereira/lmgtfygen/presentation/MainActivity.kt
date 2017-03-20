@@ -12,7 +12,6 @@ import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.ClipData
 import android.support.v4.app.ShareCompat
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.wilderpereira.lmgtfygen.App
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
 
         App.getComponent().inject(this)
-        presenter.bindView(this)
+        presenter.bindView(this, this.baseContext)
 
         generatedUrlTv = findViewById(R.id.generatedUrlTv) as TextView
 
@@ -55,11 +54,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         generatedUrlTv.text = newString
     }
 
+    override fun displayToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     fun copyToClipboard(v: View){
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("url", generatedUrlTv.text)
         clipboard.primaryClip = clip
-        Toast.makeText(this, "Url copied to clipboard", Toast.LENGTH_SHORT).show()
+        displayToast(getString(R.string.url_copied))
     }
 
     fun shareUrl(v: View){
@@ -72,7 +75,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     fun shortenUrl(v: View){
         presenter.shortenUrl(generatedUrlTv.text.toString())
-        Toast.makeText(this, "Url shortened", Toast.LENGTH_SHORT).show()
     }
 
 }
