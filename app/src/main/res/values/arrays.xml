@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="search_types">
+    <string-array translatable="false" name="search_types">
         <item>Web</item>
         <item>Images</item>
         <item>Videos</item>

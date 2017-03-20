@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">LmgtfyGen</string>
-    <string name="lmgtfy_base_url"><![CDATA[lmgtfy.com/?t=&q=]]></string>
-    <string name="api_key">AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I</string>
+    <string translatable="false" name="app_name">LmgtfyGen</string>
+    <string translatable="false" name="lmgtfy_base_url"><![CDATA[lmgtfy.com/?t=&q=]]></string>
+    <string translatable="false" name="api_key">AIzaSyBuf8pcNO7fiAuulkP0UVB-VfBZ3Pa1F6I</string>
+    <string name="url_shortened">Url shortened</string>
+    <string name="url_not_shortened">Couldn\'t shorten url</string>
+    <string name="url_copied">Url copied to clipboard</string>
+    <string name="shorten">Shorten</string>
+    <string name="share">Share</string>
+    <string name="search">Search</string>
+    <string name="search_type">Search Type:</string>
 </resources>

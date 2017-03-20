@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="url_shortened">Url encurtada</string>
+    <string name="url_not_shortened">Não foi possível encurtar a url</string>
+    <string name="url_copied">Url copiada</string>
+    <string name="shorten">Encurtar</string>
+    <string name="share">Compartilhar</string>
+    <string name="search">Pesquisa</string>
+    <string name="search_type">Tipo da pesquisa:</string>
+</resources>
