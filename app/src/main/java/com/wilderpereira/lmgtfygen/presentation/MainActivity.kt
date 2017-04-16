@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         loadSpinner()
 
-        setOnClickListeners()
+        setListeners()
     }
 
     private fun loadSpinner(){
@@ -88,12 +88,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         searchTypeSpinner.adapter = adapter
     }
 
-    private fun setOnClickListeners(){
+    private fun setListeners(){
         RxAdapterView.itemSelections(searchTypeSpinner)
                 .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString(), generatedUrlTv.text) }
 
         RxTextView.textChanges(searchEt)
                 .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
+
+
     }
 
 }
