@@ -21,7 +21,6 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), MainContract.View {
 
     @Inject lateinit var presenter: MainContract.Presenter
-    lateinit var generatedUrlTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         App.getComponent().inject(this)
         presenter.bindView(this, this.baseContext)
-
-        generatedUrlTv = findViewById(R.id.generatedUrlTv) as TextView
 
         loadSpinner()
 
