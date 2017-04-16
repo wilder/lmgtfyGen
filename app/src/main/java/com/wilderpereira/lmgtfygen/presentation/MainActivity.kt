@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         loadSpinner()
 
-        val spinnerSub = RxAdapterView.itemSelections(searchTypeSpinner)
+        RxAdapterView.itemSelections(searchTypeSpinner)
                 .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString(), generatedUrlTv.text) }
 
-        val editTextSub = RxTextView.textChanges(searchEt)
+        RxTextView.textChanges(searchEt)
                 .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
 
 
