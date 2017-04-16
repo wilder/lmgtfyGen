@@ -9,7 +9,7 @@ LMGTFY (Let Me Google That For You) is a [website](https://lmgtfy.com/) that cre
 - [x] Search types
 - [x] Share + Copy Link
 - [ ] Search Engines
-- [ ] Include Internet Explainer
+- [x] Include Internet Explainer
 
 ## Download
 [<img src="https://camo.githubusercontent.com/21cd52aa8b8d6562008144a9d1d7b35596447196/687474703a2f2f692e696d6775722e636f6d2f37737130366c722e706e67">](https://play.google.com/store/apps/details?id=com.wilderpereira.lmgtfygen&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
