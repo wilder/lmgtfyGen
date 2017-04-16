@@ -10,6 +10,7 @@ interface MainContract {
     interface View{
         fun updateGeneratedUrl(newString : String)
         fun displayToast(message: String)
+        fun displayRateDialogIfNeeded()
     }
 
     interface Presenter{
@@ -17,6 +18,7 @@ interface MainContract {
         fun updateSearchType(type: String, url: CharSequence)
         fun updateSearchValue(searchValue: String, url: CharSequence)
         fun shortenUrl(bigUrl: String)
+        fun onResume()
     }
 
 }

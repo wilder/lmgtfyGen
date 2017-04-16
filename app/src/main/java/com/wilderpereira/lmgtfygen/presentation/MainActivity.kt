@@ -1,20 +1,20 @@
 package com.wilderpereira.lmgtfygen.presentation
 
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.ShareCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.jakewharton.rxbinding.widget.RxAdapterView
 import com.jakewharton.rxbinding.widget.RxTextView
+import com.kobakei.ratethisapp.RateThisApp
+import com.wilderpereira.lmgtfygen.App
 import com.wilderpereira.lmgtfygen.R
 import kotlinx.android.synthetic.main.activity_main.*
-import android.content.ClipData
-import android.support.v4.app.ShareCompat
-import android.widget.TextView
-import android.widget.Toast
-import com.wilderpereira.lmgtfygen.App
 import javax.inject.Inject
 
 
@@ -26,6 +26,20 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        RateThisApp.onStart(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
+
+    override fun displayRateDialogIfNeeded() {
+        RateThisApp.showRateDialogIfNeeded(this);
     }
 
     override fun updateGeneratedUrl(newString: String) {
@@ -58,6 +72,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private fun init(){
         App.getComponent().inject(this)
         presenter.bindView(this, this.baseContext)
+
+        val config = RateThisApp.Config(3, 5)
+        RateThisApp.init(config)
 
         loadSpinner()
 

@@ -33,6 +33,10 @@ class MainPresenter : MainContract.Presenter  {
         this.context = context
     }
 
+    override fun onResume() {
+        view.displayRateDialogIfNeeded()
+    }
+
     override fun updateSearchType(type: String, url: CharSequence) {
         view.updateGeneratedUrl(searchUrl.updateSearchType(type))
     }
