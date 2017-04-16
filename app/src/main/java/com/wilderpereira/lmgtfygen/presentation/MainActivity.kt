@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.jakewharton.rxbinding.view.RxView
 import com.jakewharton.rxbinding.widget.RxAdapterView
+import com.jakewharton.rxbinding.widget.RxCompoundButton
 import com.jakewharton.rxbinding.widget.RxTextView
 import com.kobakei.ratethisapp.RateThisApp
 import com.wilderpereira.lmgtfygen.App
@@ -95,7 +97,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         RxTextView.textChanges(searchEt)
                 .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
 
-
+        RxCompoundButton.checkedChanges(internetExplainerCb).subscribe{ checked -> presenter.includeInternetExplainer(checked) }
     }
 
 }

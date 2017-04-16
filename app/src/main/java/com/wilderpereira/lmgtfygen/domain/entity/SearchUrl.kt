@@ -11,6 +11,7 @@ class SearchUrl {
 
     val TYPE_REGEX = "(?<=t=)\\w*".toRegex()
     val SEARCH_REGEX = "(?<=q=).*$".toRegex()
+    val INTERNET_EXPLAINER_REGEX = "(?<=iie=)\\d".toRegex()
 
     @SerializedName("kind")
     @Expose
@@ -22,7 +23,7 @@ class SearchUrl {
     @Expose
     var longUrl: String? = null
 
-    var url: String = "lmgtfy.com/?t=&q="
+    var url: String = "lmgtfy.com/?iie=0&t=&q="
 
     override fun toString(): String {
         return "SearchUrl(kind=$kind, shortUrl=$shortUrl, longUrl=$longUrl, url='$url')"
@@ -35,6 +36,11 @@ class SearchUrl {
 
     fun updateSearchValue(searchValue: String): String {
         url = url.replace(SEARCH_REGEX, searchValue)
+        return url
+    }
+
+    fun includeInternetExplainer(shouldInclude: Boolean) : String{
+        url = url.replace(INTERNET_EXPLAINER_REGEX, if(shouldInclude) "1" else "0" )
         return url
     }
 

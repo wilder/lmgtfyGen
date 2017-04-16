@@ -17,6 +17,7 @@ interface MainContract {
         fun bindView(view : MainContract.View, context: Context)
         fun updateSearchType(type: String, url: CharSequence)
         fun updateSearchValue(searchValue: String, url: CharSequence)
+        fun includeInternetExplainer(include: Boolean)
         fun shortenUrl(bigUrl: String)
         fun onResume()
     }

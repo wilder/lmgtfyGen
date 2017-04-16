@@ -7,4 +7,5 @@
     <string name="share">Compartilhar</string>
     <string name="search">Pesquisa</string>
     <string name="search_type">Tipo da pesquisa:</string>
+    <string name="include_internet_explainer">Incluir Explicação de Internet</string>
 </resources>

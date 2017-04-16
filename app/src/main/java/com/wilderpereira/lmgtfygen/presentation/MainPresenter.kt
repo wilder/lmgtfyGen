@@ -45,6 +45,10 @@ class MainPresenter : MainContract.Presenter  {
         view.updateGeneratedUrl(searchUrl.updateSearchValue(searchValue))
     }
 
+    override fun includeInternetExplainer(include: Boolean) {
+        view.updateGeneratedUrl(searchUrl.includeInternetExplainer(include))
+    }
+
     override fun shortenUrl(bigUrl: String) {
         var urlShortener = retrofit.create(UrlShortenerApi::class.java)
 
