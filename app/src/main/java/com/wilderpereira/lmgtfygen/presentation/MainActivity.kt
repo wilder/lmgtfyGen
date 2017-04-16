@@ -25,19 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        App.getComponent().inject(this)
-        presenter.bindView(this, this.baseContext)
-
-        loadSpinner()
-
-        RxAdapterView.itemSelections(searchTypeSpinner)
-                .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString(), generatedUrlTv.text) }
-
-        RxTextView.textChanges(searchEt)
-                .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
-
-
+        init()
     }
 
     override fun updateGeneratedUrl(newString: String) {
@@ -67,11 +55,28 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.shortenUrl(generatedUrlTv.text.toString())
     }
 
+    private fun init(){
+        App.getComponent().inject(this)
+        presenter.bindView(this, this.baseContext)
+
+        loadSpinner()
+
+        setOnClickListeners()
+    }
+
     private fun loadSpinner(){
         val adapter = ArrayAdapter.createFromResource(
                 this, R.array.search_types, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         searchTypeSpinner.adapter = adapter
+    }
+
+    private fun setOnClickListeners(){
+        RxAdapterView.itemSelections(searchTypeSpinner)
+                .subscribe { pos -> presenter.updateSearchType(searchTypeSpinner.selectedItem.toString(), generatedUrlTv.text) }
+
+        RxTextView.textChanges(searchEt)
+                .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
     }
 
 }
