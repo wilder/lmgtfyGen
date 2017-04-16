@@ -40,13 +40,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     }
 
-    private fun loadSpinner(){
-        val adapter = ArrayAdapter.createFromResource(
-                this, R.array.search_types, android.R.layout.simple_spinner_item)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        searchTypeSpinner.adapter = adapter
-    }
-
     override fun updateGeneratedUrl(newString: String) {
         generatedUrlTv.text = newString
     }
@@ -72,6 +65,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     fun shortenUrl(v: View){
         presenter.shortenUrl(generatedUrlTv.text.toString())
+    }
+
+    private fun loadSpinner(){
+        val adapter = ArrayAdapter.createFromResource(
+                this, R.array.search_types, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        searchTypeSpinner.adapter = adapter
     }
 
 }
