@@ -16,6 +16,7 @@ import com.jakewharton.rxbinding.widget.RxTextView
 import com.kobakei.ratethisapp.RateThisApp
 import com.wilderpereira.lmgtfygen.App
 import com.wilderpereira.lmgtfygen.R
+import com.wilderpereira.lmgtfygen.utils.UIUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -98,6 +99,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 .subscribe { text -> presenter.updateSearchValue(text.toString(), generatedUrlTv.text)}
 
         RxCompoundButton.checkedChanges(internetExplainerCb).subscribe{ checked -> presenter.includeInternetExplainer(checked) }
+
+        RxView.focusChanges(searchEt).subscribe{ hasFocus -> if (!hasFocus) UIUtils.hideKeyboard(this, searchEt) }
     }
 
 }
