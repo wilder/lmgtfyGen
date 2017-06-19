@@ -2,6 +2,7 @@ package com.wilderpereira.lmgtfygen.domain.entity
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.net.URLEncoder
 
 /**
  * Created by Wilder on 22/01/17.
@@ -30,12 +31,12 @@ class SearchUrl {
     }
 
     fun updateSearchType(type: String): String {
-        url = url.replace(TYPE_REGEX, type[0].toLowerCase().toString())
+        url = url.replace(TYPE_REGEX, URLEncoder.encode(type[0].toLowerCase().toString(), "UTF-8"))
         return url
     }
 
     fun updateSearchValue(searchValue: String): String {
-        url = url.replace(SEARCH_REGEX, searchValue)
+        url = url.replace(SEARCH_REGEX, URLEncoder.encode(searchValue, "UTF-8"))
         return url
     }
 
