@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun displayRateDialogIfNeeded() {
-        RateThisApp.showRateDialogIfNeeded(this);
+        RateThisApp.showRateDialogIfNeeded(this@MainActivity)
     }
 
     override fun updateGeneratedUrl(newString: String) {
