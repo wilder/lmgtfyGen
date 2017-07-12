@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onStart() {
         super.onStart()
-        RateThisApp.onStart(this)
     }
 
     override fun onResume() {
