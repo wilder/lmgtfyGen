@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         val config = RateThisApp.Config(3, 5)
         RateThisApp.init(config)
+        RateThisApp.onCreate(this@MainActivity)
 
         loadSpinner()
 
