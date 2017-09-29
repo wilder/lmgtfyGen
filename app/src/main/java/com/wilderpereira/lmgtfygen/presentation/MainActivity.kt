@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun init(){
-        App.getComponent().inject(this)
+        App.component?.inject(this)
         presenter.bindView(this, this.baseContext)
 
         val config = RateThisApp.Config(3, 5)

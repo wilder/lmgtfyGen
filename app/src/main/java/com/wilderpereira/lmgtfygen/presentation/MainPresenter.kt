@@ -25,7 +25,7 @@ class MainPresenter : MainContract.Presenter  {
     var searchUrl = SearchUrl()
 
     constructor(){
-        App.getComponent().inject(this)
+        App.component?.inject(this)
     }
 
     override fun bindView(view: MainContract.View, context: Context) {
