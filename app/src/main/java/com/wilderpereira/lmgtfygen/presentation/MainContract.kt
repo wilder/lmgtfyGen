@@ -11,6 +11,8 @@ interface MainContract {
         fun updateGeneratedUrl(newString : String)
         fun displayToast(message: String)
         fun displayRateDialogIfNeeded()
+        fun showLoading()
+        fun hideLoading()
     }
 
     interface Presenter{
