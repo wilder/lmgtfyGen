@@ -1,7 +1,7 @@
 # Lmgtfy Generator
-Android app that allows the creation of lmgtfy urls with a embedded url shortener to hide the LMGTFY url.
+Android app that allows the creation of lmgtfy urls with an embedded url shortener to hide the LMGTFY url.
 
-LMGTFY (Let Me Google That For You) is a [website](https://lmgtfy.com/) that creates a demonstration of how to conduct a user-specified Google search.
+LMGTFY (Let Me Google That For You) is a [website](https://lmgtfy.com/) that creates a demonstration of how to conduct an user-specified Google search.
 
 <img src="https://lh3.googleusercontent.com/s9PCBWGO9VbE1beq3I_nn1clFsAP3b2cXrYOpqM1On5qNqm2kSfGEvnr98ZYzGH2kw=h900-rw" width="250">
 
