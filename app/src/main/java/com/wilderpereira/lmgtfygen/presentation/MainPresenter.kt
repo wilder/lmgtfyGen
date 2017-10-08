@@ -2,7 +2,6 @@ package com.wilderpereira.lmgtfygen.presentation
 
 import android.content.Context
 import android.util.Log
-import com.wilderpereira.lmgtfygen.App
 import com.wilderpereira.lmgtfygen.R
 import com.wilderpereira.lmgtfygen.domain.entity.SearchUrl
 import com.wilderpereira.lmgtfygen.domain.entity.ShortenerBody
@@ -15,17 +14,12 @@ import javax.inject.Inject
 /**
  * Created by Wilder on 22/01/17.
  */
-class MainPresenter : MainContract.Presenter {
+class MainPresenter @Inject constructor(val retrofit: Retrofit) : MainContract.Presenter {
 
     lateinit var view: MainContract.View
     lateinit var context: Context
-    @Inject lateinit var retrofit: Retrofit
 
     var searchUrl = SearchUrl()
-
-    constructor() {
-        App.component?.inject(this)
-    }
 
     override fun bindView(view: MainContract.View, context: Context) {
         this.view = view

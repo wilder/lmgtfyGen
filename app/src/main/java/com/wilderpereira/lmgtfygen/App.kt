@@ -11,6 +11,9 @@ import com.wilderpereira.lmgtfygen.dagger.component.MainComponent
 
 class App : Application() {
 
+    lateinit var component: MainComponent
+    private set
+
     override fun onCreate() {
         super.onCreate()
         initDagger()
@@ -20,10 +23,5 @@ class App : Application() {
         component = DaggerMainComponent
                 .builder()
                 .build()
-    }
-
-    companion object {
-        var component: MainComponent? = null
-            private set
     }
 }
