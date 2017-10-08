@@ -17,7 +17,7 @@ import com.jakewharton.rxbinding.widget.RxTextView
 import com.kobakei.ratethisapp.RateThisApp
 import com.wilderpereira.lmgtfygen.App
 import com.wilderpereira.lmgtfygen.R
-import com.wilderpereira.lmgtfygen.utils.UIUtils
+import com.wilderpereira.lmgtfygen.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import javax.inject.Inject
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
         RxCompoundButton.checkedChanges(internetExplainerCb).subscribe { checked -> presenter.includeInternetExplainer(checked) }
 
-        RxView.focusChanges(searchEt).subscribe { hasFocus -> if (!hasFocus) UIUtils.hideKeyboard(this, searchEt) }
+        RxView.focusChanges(searchEt).subscribe { hasFocus -> if (!hasFocus) searchEt.hideKeyboard() }
     }
 
 }
