@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     private fun init() {
         (application as App).component.inject(this)
-        presenter.bindView(this, this.baseContext)
+        presenter.bindView(this)
 
         val config = RateThisApp.Config(3, 5)
         RateThisApp.init(config)

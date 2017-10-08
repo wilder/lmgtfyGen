@@ -1,11 +1,11 @@
 package com.wilderpereira.lmgtfygen.presentation
 
-import android.content.Context
 import android.util.Log
 import com.wilderpereira.lmgtfygen.R
 import com.wilderpereira.lmgtfygen.domain.entity.SearchUrl
 import com.wilderpereira.lmgtfygen.domain.entity.ShortenerBody
 import com.wilderpereira.lmgtfygen.domain.repository.UrlShortenerApi
+import com.wilderpereira.lmgtfygen.utils.TextProvider
 import retrofit2.Retrofit
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -14,16 +14,16 @@ import javax.inject.Inject
 /**
  * Created by Wilder on 22/01/17.
  */
-class MainPresenter @Inject constructor(val retrofit: Retrofit){
+class MainPresenter @Inject constructor(
+        val retrofit: Retrofit,
+        val textProvider: TextProvider){
 
     lateinit var view: View
-    lateinit var context: Context
 
     var searchUrl = SearchUrl()
 
-    fun bindView(view: View, context: Context) {
+    fun bindView(view: View) {
         this.view = view
-        this.context = context
     }
 
     fun onResume() {
@@ -45,18 +45,20 @@ class MainPresenter @Inject constructor(val retrofit: Retrofit){
     fun shortenUrl(bigUrl: String) {
         var urlShortener = retrofit.create(UrlShortenerApi::class.java)
 
-        var shortenResponse = urlShortener.shortenUrl(context.getString(R.string.api_key), ShortenerBody(bigUrl.trimEnd().trimStart().replace(' ', '+')))
+        var shortenResponse = urlShortener.shortenUrl(
+                textProvider.getText(R.string.api_key),
+                ShortenerBody(bigUrl.trimEnd().trimStart().replace(' ', '+')))
         shortenResponse.subscribeOn(Schedulers.newThread())
                 .doOnSubscribe { view.showLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ shortenResponse ->
                     view.updateGeneratedUrl(shortenResponse.shortUrl.toString())
-                    view.displayToast(context.getString(R.string.url_shortened))
+                    view.displayToast(textProvider.getText(R.string.url_shortened))
                     view.hideLoading()
                 },
                         { e ->
                             Log.d("mainpresenter", "error " + e.message)
-                            view.displayToast(context.getString(R.string.url_not_shortened))
+                            view.displayToast(textProvider.getText(R.string.url_not_shortened))
                             view.hideLoading()
                         })
     }
