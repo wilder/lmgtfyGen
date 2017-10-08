@@ -14,35 +14,35 @@ import javax.inject.Inject
 /**
  * Created by Wilder on 22/01/17.
  */
-class MainPresenter @Inject constructor(val retrofit: Retrofit) : MainContract.Presenter {
+class MainPresenter @Inject constructor(val retrofit: Retrofit){
 
-    lateinit var view: MainContract.View
+    lateinit var view: View
     lateinit var context: Context
 
     var searchUrl = SearchUrl()
 
-    override fun bindView(view: MainContract.View, context: Context) {
+    fun bindView(view: View, context: Context) {
         this.view = view
         this.context = context
     }
 
-    override fun onResume() {
+    fun onResume() {
         view.displayRateDialogIfNeeded()
     }
 
-    override fun updateSearchType(type: String, url: CharSequence) {
+    fun updateSearchType(type: String, url: CharSequence) {
         view.updateGeneratedUrl(searchUrl.updateSearchType(type))
     }
 
-    override fun updateSearchValue(searchValue: String, url: CharSequence) {
+    fun updateSearchValue(searchValue: String, url: CharSequence) {
         view.updateGeneratedUrl(searchUrl.updateSearchValue(searchValue))
     }
 
-    override fun includeInternetExplainer(include: Boolean) {
+    fun includeInternetExplainer(include: Boolean) {
         view.updateGeneratedUrl(searchUrl.includeInternetExplainer(include))
     }
 
-    override fun shortenUrl(bigUrl: String) {
+    fun shortenUrl(bigUrl: String) {
         var urlShortener = retrofit.create(UrlShortenerApi::class.java)
 
         var shortenResponse = urlShortener.shortenUrl(context.getString(R.string.api_key), ShortenerBody(bigUrl.trimEnd().trimStart().replace(' ', '+')))
@@ -61,4 +61,11 @@ class MainPresenter @Inject constructor(val retrofit: Retrofit) : MainContract.P
                         })
     }
 
+    interface View{
+        fun updateGeneratedUrl(newString : String)
+        fun displayToast(message: String)
+        fun displayRateDialogIfNeeded()
+        fun showLoading()
+        fun hideLoading()
+    }
 }

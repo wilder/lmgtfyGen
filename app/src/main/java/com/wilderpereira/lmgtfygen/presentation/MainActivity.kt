@@ -23,9 +23,9 @@ import org.jetbrains.anko.indeterminateProgressDialog
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(), MainPresenter.View {
 
-    @Inject lateinit var presenter: MainContract.Presenter
+    @Inject lateinit var presenter: MainPresenter
     private val mLoadingDialog: ProgressDialog by lazy { indeterminateProgressDialog("Shortening url...", "Please wait").apply { setCancelable(false) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
