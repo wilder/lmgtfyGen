@@ -3,12 +3,13 @@ package com.wilderpereira.lmgtfygen.domain.entity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.net.URLEncoder
+import javax.inject.Inject
 
 /**
  * Created by Wilder on 22/01/17.
  */
 
-class SearchUrl {
+class SearchUrl @Inject constructor(){
 
     val TYPE_REGEX = "(?<=t=)\\w*".toRegex()
     val SEARCH_REGEX = "(?<=q=).*$".toRegex()

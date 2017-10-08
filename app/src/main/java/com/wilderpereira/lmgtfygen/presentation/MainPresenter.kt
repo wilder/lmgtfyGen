@@ -16,11 +16,10 @@ import javax.inject.Inject
  */
 class MainPresenter @Inject constructor(
         val retrofit: Retrofit,
+        var searchUrl: SearchUrl,
         val textProvider: TextProvider){
 
     lateinit var view: View
-
-    var searchUrl = SearchUrl()
 
     fun bindView(view: View) {
         this.view = view
